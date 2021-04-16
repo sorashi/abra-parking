@@ -4,11 +4,13 @@ const User = require('../shared/models/User')
 const ApiClient = require('./ApiClient')
 
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const port = 3001
 
 app.use(express.json()) // for parsing json data
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
 
 function myAuthorizer(username, password) {
     const userMatches = basicAuth.safeCompare(username, 'customuser')
