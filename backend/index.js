@@ -11,6 +11,7 @@ app.use(express.json()) // for parsing json data
 
 app.use(basicAuth( { authorizer: myAuthorizer } ))
  
+// TODO
 function myAuthorizer(username, password) {
     const userMatches = basicAuth.safeCompare(username, 'customuser')
     const passwordMatches = basicAuth.safeCompare(password, 'custompassword')
