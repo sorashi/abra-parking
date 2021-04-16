@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import LoginForm from "./components/LoginForm";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {Container, Row} from "react-bootstrap";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+    handleLoginFormSubmit(username: string, password: string) {
+        console.log('logging in as', username, password)
+    }
+
+    render() {
+        return (
+            <Container style={{padding: "10px"}}>
+                <Row className="justify-content-center">
+                    <LoginForm onSubmit={this.handleLoginFormSubmit}/>
+                </Row>
+            </Container>
+        );
+    }
 }
-
-export default App;
