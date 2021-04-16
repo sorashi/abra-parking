@@ -6,3 +6,9 @@ services:
       context: .
     ports:
       - "3001:3001"
+  frontend:
+    build:
+      dockerfile: ./frontend/Dockerfile
+      context: .
+    ports:
+      - "80:80"

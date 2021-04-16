@@ -1,4 +1,4 @@
-import User from './shared/models/User'
+import {User} from 'shared'
 
 export default class BackendClient {
     private static readonly baseUrl = 'http://localhost:3001'
@@ -16,7 +16,7 @@ export default class BackendClient {
             .then(res => res.json())
             .then(data => {
                 if (!data.ok) throw data.error
-                let user = new User()
+                let user = new User(0, null, null, null)
                 Object.assign(user, data.data)
                 return user
             })

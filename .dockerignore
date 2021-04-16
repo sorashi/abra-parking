@@ -1,7 +1,9 @@
 # Docker
-Dockerfile
+**/Dockerfile
 .dockerignore
 docker-compose.yml
 
 # Node
-node_modules/
+**/node_modules/
+
+.git/

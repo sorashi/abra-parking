@@ -1,7 +1,7 @@
-const axios = require('axios')
-const User = require('../shared/models/User')
+import axios from 'axios'
+import {User} from 'shared'
 
-class ApiClient {
+export default class ApiClient {
     static fetch = axios.create({
         baseURL: "https://rezervace.flexibee.eu:5434",
         headers: {
@@ -32,5 +32,3 @@ class ApiClient {
         return `Basic ${base64}`
     }
 }
-
-module.exports = ApiClient
