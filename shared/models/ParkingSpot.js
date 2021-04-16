@@ -1,10 +1,8 @@
-class ParkingSpot {
-    id
-    is_full
-    listOfReservations // TODO
-    constructor() {
-
+export default class ParkingSpot {
+    constructor(id, isFull, listOfReservations) {
+        this.id = id
+        this.isFull = isFull
+        this.listOfReservations = listOfReservations
     }
 }
 
-module.exports = ParkingSpot

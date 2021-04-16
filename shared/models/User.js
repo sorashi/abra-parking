@@ -1,8 +1,4 @@
-class User {
-    id
-    email
-    password
-    role
+export default class User {
     constructor(id, email, password, role) {
         this.id = id
         this.email = email
@@ -10,5 +6,3 @@ class User {
         this.role = role
     }
 }
-
-module.exports = User
