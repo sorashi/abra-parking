@@ -1,4 +1,5 @@
 class Reservation {
+    id
     timeBegin
     timeEnd
     constructor() {
