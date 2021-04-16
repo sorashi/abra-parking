@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node .",
-    "dev:watch": "nodemon -L"
+    "dev:watch": "nodemon -L --watch ../shared --watch ."
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
