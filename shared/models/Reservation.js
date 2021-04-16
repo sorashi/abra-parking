@@ -1,4 +1,4 @@
-export default class Reservation {
+class Reservation {
     constructor(id, userId, parkingSpotId, timeBegin, timeEnd) {
         this.id = id
         this.userId = userId
@@ -7,3 +7,5 @@ export default class Reservation {
         this.timeEnd = timeEnd
     }
 }
+
+module.exports = Reservation

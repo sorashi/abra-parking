@@ -1,4 +1,4 @@
-export default class ParkingSpot {
+class ParkingSpot {
     constructor(id, isFull, listOfReservations) {
         this.id = id
         this.isFull = isFull
@@ -6,3 +6,4 @@ export default class ParkingSpot {
     }
 }
 
+module.exports = ParkingSpot
