@@ -1,0 +1,11 @@
+version: '3'
+services:
+  server:
+    build: "."
+    ports:
+      - "3000:3000"
+    command: yarn dev:watch
+    volumes:
+     - ./backend:/usr/src/backend
+     - ./shared:/usr/src/shared
+     - /usr/src/backend/node_modules
