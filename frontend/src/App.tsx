@@ -3,11 +3,11 @@ import './App.css';
 import LoginForm from "./components/LoginForm";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container, Row} from "react-bootstrap";
+import User from './shared/models/User'
 
 type AppState = {
     isLoggedIn: boolean
-    username: string | null,
-    password: string | null
+    user: User | null
 }
 
 export default class App extends Component<{}, AppState> {
@@ -15,17 +15,15 @@ export default class App extends Component<{}, AppState> {
         super(props)
         this.state = {
             isLoggedIn: false,
-            username: null,
-            password: null
+            user: null
         }
         this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this)
     }
     handleLoginFormSubmit(username: string, password: string) {
         console.log('logging in as', username, password)
-        this.setState(_ => ({
+        this.setState(state => ({
             isLoggedIn: true,
-            username: username,
-            password: password
+            user: new User(0, username, password, "role")
         }))
     }
 
@@ -35,7 +33,7 @@ export default class App extends Component<{}, AppState> {
         </Row>;
         if(this.state.isLoggedIn) {
             row = <Row className="justify-content-center">
-                <span>Logged in as {this.state.username}</span>
+                <span>Logged in as {this.state.user?.email ?? ""}</span>
             </Row>
         }
         return (
