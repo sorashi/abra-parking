@@ -1,6 +1,7 @@
 class ParkingSpot {
-    isFull
     id
+    is_full
+    listOfReservations // TODO
     constructor() {
 
     }
