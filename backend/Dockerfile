@@ -1,22 +1,23 @@
 FROM node:14-alpine
 
-RUN mkdir -p /usr/src/backend /usr/src/shared
-WORKDIR /usr/src/backend
+RUN mkdir -p /app/backend /app/shared
+WORKDIR /app
 
-# restore and build shared
-COPY shared/package.json shared/yarn.lock /usr/src/shared/
-RUN yarn --cwd /usr/src/shared --frozen-lockfile
-COPY ./shared ../shared
-RUN yarn --cwd /usr/src/shared build
+COPY package.json yarn.lock ./
 
-# restore backend
-COPY backend/package.json backend/yarn.lock ./
-RUN yarn --frozen-lockfile
+COPY shared /app/shared
+COPY backend /app/backend
 
-# copy rest
-COPY ./backend ./
+# restore all
+RUN yarn install --pure-lockfile --non-interactive
+
+# build shared
+WORKDIR /app/shared
+RUN yarn build
 
 # build backend
+WORKDIR /app/backend
 RUN yarn build
+
 EXPOSE 3001
 CMD node dist/

@@ -1,16 +1,22 @@
 # build environment
 FROM node:14-alpine as build
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+COPY shared /app/shared
+COPY frontend /app/frontend
+
+# restore all
+RUN yarn install --pure-lockfile --non-interactive
+
+# build shared
+WORKDIR /app/shared
+RUN yarn build
+
+# build frontend
 WORKDIR /app/frontend
-
-# restore and build shared
-COPY shared/package.json shared/yarn.lock ../shared/
-RUN yarn --cwd ../shared --frozen-lockfile
-COPY ./shared ../shared
-RUN yarn --cwd ../shared build
-
-COPY frontend/package.json frontend/yarn.lock ./
-RUN yarn install --prod --frozen-lockfile
-COPY ./frontend ./
 RUN yarn build
 
 # production environment
