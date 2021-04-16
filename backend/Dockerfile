@@ -1,11 +1,13 @@
 FROM node:14-alpine
 
-WORKDIR /app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 # restore in seperate layers
-COPY package.json yarn.lock ./
-RUN yarn
+COPY package.json .
+RUN yarn install
 
 # copy rest
-COPY . ./
+COPY . .
+EXPOSE 3000
 CMD yarn start

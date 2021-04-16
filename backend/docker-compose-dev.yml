@@ -6,4 +6,5 @@ services:
       - "3000:3000"
     command: yarn dev:watch
     volumes:
-     - ./:/app/
+     - ./:/usr/src/app
+     - /usr/src/app/node_modules
