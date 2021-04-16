@@ -22,8 +22,13 @@ export default class App extends Component<{}, AppState> {
     }
 
     async handleLoginFormSubmit(username: string, password: string) {
-        console.log('logging in as', username, password)
-        let user = await BackendClient.getUser(username, password)
+        let user:User|null = null
+        try {
+            user = await BackendClient.login(username, password)
+        } catch (err) {
+            console.log(err)
+            return
+        }
         this.setState(_ => ({
             isLoggedIn: true,
             user: user
@@ -36,7 +41,7 @@ export default class App extends Component<{}, AppState> {
         </Row>;
         if(this.state.isLoggedIn) {
             row = <Row className="justify-content-center">
-                <span>Logged in as {this.state.user?.email ?? ""}</span>
+                <span>Logged in as {this.state.user?.email}</span>
             </Row>
         }
         return (

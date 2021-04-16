@@ -12,5 +12,5 @@ COPY ./shared /usr/src/shared
 
 # copy rest
 COPY ./backend .
-EXPOSE 3000
+EXPOSE 3001
 CMD yarn start

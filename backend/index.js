@@ -1,17 +1,15 @@
 const ParkingSpot = require('../shared/models/ParkingSpot')
 const Reservation = require('../shared/models/Reservation')
 const User = require('../shared/models/User')
+const ApiClient = require('./ApiClient')
 
 const express = require('express')
-const basicAuth = require('express-basic-auth')
 const app = express()
-const port = 3000
+const port = 3001
 
 app.use(express.json()) // for parsing json data
+app.use(express.urlencoded({ extended: true }))
 
-app.use(basicAuth( { authorizer: myAuthorizer } ))
- 
-// TODO
 function myAuthorizer(username, password) {
     const userMatches = basicAuth.safeCompare(username, 'customuser')
     const passwordMatches = basicAuth.safeCompare(password, 'custompassword')
@@ -41,19 +39,35 @@ function fetchRequests(listOfUsers){
 }
 
 function unauthorizedResponse(res) {
-    res.send(payload(ok=false, error="Unauthorized"))
+    res.send(new payload(null, false, "Unauthorized"))
 }
+
+// requires username and password in body
+// returns User
+app.post('/login', async (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+    let user = null
+    try {
+        user = await ApiClient.getMe(username, password)
+    }
+    catch { // the only error type is bad credentials
+        unauthorizedResponse(res)
+        return
+    }
+    res.send(new payload(user))
+})
 
 app.get('/getReservations', (req, res) => {
     req.auth.user, req.auth.password
 
     listOfUsers = req.body
-    try{
+    try {
         res.send(payload(data=fetchRequests(listOfUsers)))
     }
-    catch{
+    catch {
         res.send(payload(ok=false, error="ERROR: Problem with fetching requests."))
-    }finally{
+    } finally {
         console.log("unable to send error")
     }
 })
