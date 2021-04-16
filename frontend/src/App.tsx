@@ -4,6 +4,7 @@ import LoginForm from "./components/LoginForm";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container, Row} from "react-bootstrap";
 import User from './shared/models/User'
+import BackendClient from "./BackendClient";
 
 type AppState = {
     isLoggedIn: boolean
@@ -19,11 +20,13 @@ export default class App extends Component<{}, AppState> {
         }
         this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this)
     }
-    handleLoginFormSubmit(username: string, password: string) {
+
+    async handleLoginFormSubmit(username: string, password: string) {
         console.log('logging in as', username, password)
-        this.setState(state => ({
+        let user = await BackendClient.getUser(username, password)
+        this.setState(_ => ({
             isLoggedIn: true,
-            user: new User(0, username, password, "role")
+            user: user
         }))
     }
 
