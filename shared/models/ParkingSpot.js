@@ -1,5 +1,6 @@
 class ParkingSpot {
-    name
+    isFull
+    id
     constructor() {
 
     }
