@@ -5,15 +5,15 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-COPY shared /app/shared
-COPY frontend /app/frontend
-
-# restore all
-RUN yarn install --pure-lockfile --non-interactive
-
 # build shared
+COPY shared /app/shared
 WORKDIR /app/shared
+RUN yarn install
 RUN yarn build
+
+# restore frontend
+COPY frontend /app/frontend
+RUN yarn install --pure-lockfile --non-interactive
 
 # build frontend
 WORKDIR /app/frontend
