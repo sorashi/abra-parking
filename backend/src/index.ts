@@ -5,7 +5,7 @@ import express from 'express'
 import cors from 'cors'
 const app = express()
 const port = 3001
-// tes
+
 app.use(express.json()) // for parsing json data
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())

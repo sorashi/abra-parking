@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container, Row} from "react-bootstrap";
 import BackendClient from "./BackendClient";
 import {User} from 'shared'
+import UserInfo from "./components/UserInfo";
 
 type AppState = {
     isLoggedIn: boolean
@@ -36,17 +37,16 @@ export default class App extends Component<{}, AppState> {
     }
 
     render() {
-        let row = <Row className="justify-content-center">
+        let content = <Row className="justify-content-center">
             <LoginForm onSubmit={this.handleLoginFormSubmit}/>
         </Row>;
         if(this.state.isLoggedIn) {
-            row = <Row className="justify-content-center">
-                <span>Logged in as {this.state.user?.email}</span>
-            </Row>
+            content = (<><Row className="justify-content-center"><UserInfo user={this.state.user} /></Row>
+            <Row><span>Logged in as {this.state.user?.email}</span></Row></>)
         }
         return (
             <Container style={{padding: "10px"}}>
-                {row}
+                {content}
             </Container>
         );
     }
